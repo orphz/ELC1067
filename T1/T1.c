@@ -4,7 +4,7 @@
 
 int ler_alunos(int* mat, char nomes[][50], int* n)
 {
-	FILE *f = fopen("alunos.txt", "r");
+	FILE *f = fopen("Alunos.txt", "r");
 	int matricula, i, linha=0;
 	char c, *nome;
 	while (feof(f)!=0)
@@ -33,7 +33,7 @@ int ler_alunos(int* mat, char nomes[][50], int* n)
 
 void ler_notas(float* media)
 {
-    FILE *f = fopen("notas.txt", "r");
+    FILE *f = fopen("Notas.txt", "r");
     int matricula, i=0;
 	float n1, n2;
 

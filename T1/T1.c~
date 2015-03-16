@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-int ler_alunos(int* mat, char **nomes, int* n)
+int ler_alunos(int* mat, char nomes[][50], int* n)
 {
 	FILE *f = fopen("alunos.txt", "r");
 	int matricula, i, linha=0;
