@@ -45,7 +45,7 @@ void ler_alunos(int* mat, char** nomes, int* n)
 		nome[i]='\0';
 		strcpy(nomes[linha], nome);
 		mat[linha]=matricula;
-		printf ("%s - %d - %d %d",nomes[linha],mat[linha], i, linha);
+		printf ("%s - %d",nomes[linha],mat[linha]);
 		getchar();
 		linha++;
 	}
@@ -95,7 +95,6 @@ int main (int argc, char** argv)
 
 	int tam=linhas();
 	//int tam=610;
-
 	printf ("tamanho %d\n", tam);
 	char** nomes;
 	int* mat, n;
