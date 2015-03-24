@@ -44,14 +44,13 @@ void ler_alunos(int* mat, char** nomes, int* n)
 			i++;
 		}
 		nome[i]='\0';
-		nomes[linha]=(char *) malloc ((strlen(nomes[linha])+1)*sizeof(char));
+		nomes[linha]=(char *) malloc ( (strlen(nome) + 1)*sizeof(char));
 		strcpy(nomes[linha], nome);
 		mat[linha]=matricula;
-		//printf ("%s - %d - %d %d",nomes[linha],mat[linha], i, linha+1);
-		//getchar();
+		printf ("%s - %d - %d %d", nomes[linha], mat[linha], i, linha+1);
+		getchar();
 		linha++;
 	}
-	free(nome);
 	*n=linha;
 	fclose(f);
 }
@@ -88,13 +87,13 @@ void pesquisa(char* search, char** nomes, float* medias, int n)
 
 /*void pesquisa(char* search, char** nomes, float* media, int* mat, int n)
 {	
-	FILE *n=fopen("Notas.txt","r");
+	FILE *f=fopen("Notas.txt","r");
 	int i=0;
 	int* matricula;
 	matricula=(int *) malloc (30*sizeof(int));
     	while (feof(f)==0)
     	{
-        	fscanf(n, "%d * *", &matricula);
+        	fscanf(f, "%d * *", &matricula);
         	for (i=0;i<n;i++)
 		{
 			if(matricula==mat[i])
@@ -120,8 +119,8 @@ int main (int argc, char** argv)
 		strcpy(search, argv[1]);
 	}
 
-	int tam=linhas();
-	//int tam=25;
+	//int tam=linhas();
+	int tam=50;
 	//printf ("tamanho %d\n", tam);
 	
 	char** nomes;
@@ -140,7 +139,7 @@ int main (int argc, char** argv)
 
 	ler_alunos(mat, nomes, &n);
 	ler_notas(medias);
-	pesquisa(search, nomes, medias, mat, n);
+	pesquisa(search, nomes, medias, n);
 
 	for(i=0;i<n;i++)
 	{
