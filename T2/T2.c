@@ -28,7 +28,7 @@ void ler_alunos(int* mat, char** nomes, int* n)
 	char* nome;
 	nome=(char *) malloc (50*sizeof(char));
 	
-	while (c!=EOF)
+	while (feof(f)==0)
 	{	
 		fscanf (f, "%d", &matricula);
 		c=fgetc(f);
@@ -47,12 +47,15 @@ void ler_alunos(int* mat, char** nomes, int* n)
 		nomes[linha]=(char *) malloc ( (strlen(nome) + 1)*sizeof(char));
 		strcpy(nomes[linha], nome);
 		mat[linha]=matricula;
-		printf ("%s - %d - %d %d", nomes[linha], mat[linha], i, linha+1);
+		printf ("%s - %d - %d letras, linha %d", nomes[linha], mat[linha], i, linha+1);
 		getchar();
 		linha++;
+		*n=linha;
 	}
-	*n=linha;
+	free(nome);
 	fclose(f);
+	printf ("fim alunos");
+	getchar();
 }
 
 void ler_notas(float* medias)
@@ -112,7 +115,7 @@ void pesquisa(char* search, char** nomes, float* medias, int n)
 int main (int argc, char** argv)
 {
 	char* search;
-	search=(char *) malloc (30*sizeof(char));
+	search=(char *) malloc (25*sizeof(char));
 	if(search==NULL){printf ("Memoria insuf!");}
 	if (argc>1)
 	{
@@ -124,7 +127,8 @@ int main (int argc, char** argv)
 	//printf ("tamanho %d\n", tam);
 	
 	char** nomes;
-	int* mat, n;
+	int* mat;
+	int n;
 	int i;
 	float* medias;
 
@@ -141,13 +145,13 @@ int main (int argc, char** argv)
 	ler_notas(medias);
 	pesquisa(search, nomes, medias, n);
 
-	for(i=0;i<n;i++)
+	/*for(i=0;i<n;i++)
 	{
 		free(nomes[i]);
 	}
 	free(search);
 	free(mat);
 	free(medias);
-	
+	*/
 	return 0;
 }
