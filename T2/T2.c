@@ -30,7 +30,7 @@ void ler_alunos(int* mat, char** nomes, int* n)
 	
 	while (feof(f)==0)
 	{	
-		fscanf (f, "%d", &matricula);
+		if(fscanf (f, "%d", &matricula)<0){break;}
 		c=fgetc(f);
 		while (c==' ')
 		{
@@ -47,12 +47,13 @@ void ler_alunos(int* mat, char** nomes, int* n)
 		nomes[linha]=(char *) malloc ( (strlen(nome) + 1)*sizeof(char));
 		strcpy(nomes[linha], nome);
 		mat[linha]=matricula;
-		printf ("%s - %d - %d letras, linha %d", nomes[linha], mat[linha], i, linha+1);
-		getchar(); // Printf+Getchar para Debug!
+		//printf ("%s - %d - %d letras, linha %d", nomes[linha], mat[linha], i, linha+1);
+		//getchar(); // Printf+Getchar para Debug!
 		linha++;
 	}
 	*n=linha;
 	fclose(f);
+	free(nome);
 }
 
 /*void ler_notas(float* medias) -> FUNÇÃO ANTIGA, AGORA ESTÁ IMPLEMENTADA NA FUNÇÃO "PESQUISA".
@@ -74,8 +75,6 @@ void ler_alunos(int* mat, char** nomes, int* n)
 
 void pesquisa(char* search, char** nomes, int* mat, int tam)
 {
-	printf ("oi");
-	getchar();
 	FILE *f=fopen("Notas.txt","r");
 	int i, j, matricula;
 	float n1, n2, media;
@@ -86,7 +85,7 @@ void pesquisa(char* search, char** nomes, int* mat, int tam)
         	{	
         		while (feof(f)==0)
 			{
-				fscanf (f, "%d  %f %f", &matricula, &n1, &n2);
+				if (fscanf (f, "%d  %f %f", &matricula, &n1, &n2)<0){break;}
 				if (matricula==mat[i])
 				{
 					media=(n1+n2)/2;
@@ -102,12 +101,11 @@ void pesquisa(char* search, char** nomes, int* mat, int tam)
 int main (int argc, char** argv)
 {
 	char* search;
-	search=(char *) malloc (25*sizeof(char));
-	if(search==NULL){printf ("Memoria insuf!");}
 	if (argc>1)
 	{
-		strcpy(search, argv[1]);
+		search=argv[1];
 	}
+	
 
 	int tam=linhas();
 	
@@ -134,7 +132,7 @@ int main (int argc, char** argv)
 	{
 		free(nomes[i]);
 	}
-	free(search);
+	free(nomes);
 	free(mat);
 	free(medias);
 }
