@@ -37,61 +37,90 @@
 struct vetor {
 	/* TODO aqui */
 	/* defina os campos da TAD vetor aqui */
-
+	
 	carta* baralho;   /* baralho - vetor de cartas */
 	int n;		/* número de cartas */
+	int r;
 };
 
 vetor_t* vetor_cria(void)
-{
+{	
+	/* gg */
 	struct vetor *vet = (struct vetor*)memo_aloca(sizeof(struct vetor));
 	vet->n = 0;
-	/* TODO aqui */
+	
 	int i;
 
-	vet->baralho=(carta *) memo_aloca(50*sizeof(carta));
+	vet->baralho = (carta *) memo_aloca(50*sizeof(carta));
 
 	for (i=0; i<50; i++)
 	{
-		vet->dados[i]=NULL;
+		vet->dados[i] = NULL;
 	}
 	return vet;
 }
 
 void vetor_destroi(vetor_t* vet)
 {
-	/* TODO aqui */
+	/* gg */
 	memo_libera(vet->baralho);
 	memo_libera(vet);	
 }
 
 int vetor_numelem(vetor_t *vet)
 {
-	/* TODO aqui */
+	/* gg */
 	return vet->n;
 }
 
 void vetor_insere_carta(vetor_t *vet, int indice, carta c)
 {
-	/* TODO aqui */
+	/* gg */
+	int i, j;
+	i = vet->n;
+	if ( (vet->n+1)%50==0 && vet->r!=-1)
+	{
+		vet->baralho = (vetor_t*) memo_realoca (vet->baralho,(vet->n)+1+5);
+	}
+	for (j=vet->n; j<(vet->n+50); j++)
+	{
+		vet->baralho[j] = NULL;
+	}
+	while (i>indice)
+	{
+		vet->baralho[i] = vet->baralho[i-1];
+		i--;
+	}
+	vet->baralho[indice] = c; 
 	vet->n++;
 }
 
 carta vetor_remove_carta(vetor_t *vet, int indice)
 {
-	/* TODO aqui */
+	/* gg */
+	carta card = vet->baralho[indice];
+	
+	if (card==NULL){return NULL;}
+
+	vet->r=-1;
+	
+	while (vet->baralho[indice]!=NULL)
+	{
+		vet->baralho[indice] = vet->baralho[indice-1];
+		indice++;
+	}
 	vet->n--;
-	return NULL;
+	return card;
 }
 
 carta vetor_acessa_carta(vetor_t *vet, int indice)
 {
-	/* TODO aqui */
-	return NULL;
+	/* gg */
+	return vet->baralho[indice];
 }
 
 bool vetor_valido(vetor_t *vet)
 {
-	/* TODO aqui */
-	return false;
+	/* gg */
+	return true;
 }
